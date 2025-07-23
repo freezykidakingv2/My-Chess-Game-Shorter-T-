@@ -61,7 +61,7 @@ int main() {
 				exit(1);
 			}
 
-			for (int pW = 0; pW < whiteP.size(); pW++) {
+			for (int pW = 0; pW < whiteP.size(); pW++) { // Checking to see if the piece is one of the white pieces vector.
 
 				if (chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] != whiteP[pW]) {
 					if (pW > 8) {
