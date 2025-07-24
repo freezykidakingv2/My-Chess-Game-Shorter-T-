@@ -52,8 +52,20 @@ int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 		}
 	}
 	else if (pA == " r") {
-		if (rowA == rowP + 2)
-	}
 
-	return 0;
+			for (int i = 0; i <= 8; i++) { // If the orginal row of the piece is == (1, 2, 3.. etc) then the row where you wan't to move to can't change or if the orginal column of the piece is == (1, 2, 3.. etc) then the column where you wan't to move to can't change
+										   // In simple terms, the row can either change and the column stays the same, or the column can either change and row stays the same.
+				if (rowP == i or colP == i) {
+					if (colA == colP or rowA == rowP) {
+						return 0;
+					}
+					else {
+						std::cout << "Error: Unable to move this piece there";
+						exit(1);
+					}
+				}
+			}
+	}
+		
+return 0;
 }
