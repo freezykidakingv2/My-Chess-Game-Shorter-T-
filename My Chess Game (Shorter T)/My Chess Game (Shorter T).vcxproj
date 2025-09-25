@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="checkP.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moves.cpp" />
     <ClCompile Include="pieces.cpp" />

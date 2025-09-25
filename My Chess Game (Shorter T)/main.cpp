@@ -59,7 +59,7 @@ int main() {
 
 
 			if (checkP(whiteP, chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)]) != 0) {
-				exit(0);
+				std::cout << "Error: Wrong Piece" << '\n';
 			}
 
 			if (piece.length() != 2) { // Checking to see if the input is 2 characters long.
@@ -141,19 +141,6 @@ int main() {
 				exit(1);
 			}
 			
-			for (int pW = 0; pW < whiteP.size(); pW++) {
-
-				if (chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] != whiteP[pW]) {
-					if (pW > 8) {
-						std::cerr << "Error: Invalid Input";
-						exit(1);
-					}
-				}
-				else {
-					break;
-				}
-			}
-
 			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
 
 			std::string move;
@@ -182,19 +169,6 @@ int main() {
 
 			char letter = piece[0];
 			char number = piece[1];
-
-			for (int p = 0; p < blackP.size(); p++) {
-
-				if (chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] != blackP[p]) {
-					if (p > 8) {
-						std::cerr << "Error: Invalid Input";
-						exit(1);
-					}
-				}
-				else {
-					break;
-				}
-			}
 
 			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
 
