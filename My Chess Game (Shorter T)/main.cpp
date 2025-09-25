@@ -56,7 +56,7 @@ int main() {
 			char letter = piece[0];
 			char number = piece[1];
 
-			if (piece.length() != 2) { // Checking to see if the input is 2 characters long.
+			if (piece.length() != 3) { // Checking to see if the input is 2 characters long.
 				std::cerr << "Error: Incorrect input";
 				exit(1);
 			}
@@ -100,7 +100,7 @@ int main() {
 			std::cout << "Pick a piece: ";
 			std::cin >> piece;
 
-			if (piece.length() != 2) {
+			if (piece.length() != 3) {
 				std::cerr << "Error: Incorrect input";
 				exit(1);
 			}

@@ -42,8 +42,8 @@ int conversionCM(char letCM, char numCM, std::string& pCM) {
 
 int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 
-	if (pA == " k" or pA == " n") {
-		if ((rowA == rowP + 2 and (colA == colP + 1 or colA == colP - 1)) or (rowA == rowP -2 and (colA == colP -1))) {
+	if ((pA == " kW" or pA == " nW") or  (pA == " kB" or pA == " nB")) {
+		if ((rowA == rowP + 2 and (colA == colP + 1 or colA == colP - 1)) or (rowA == rowP -2 and (colA == colP -1)) or (rowA == rowP + 1 and (colA == colP + 2 or colA == colP - 2)) or (rowA == rowP - 1 and (colA == colP - 2 or colA == colP + 2))) {
 			return 0;
 		}
 		else {
@@ -51,20 +51,24 @@ int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 			exit(1);
 		}
 	}
-	else if (pA == " r") {
+	else if (pA == " rW" or pA == " rB") {
 
-			for (int i = 0; i <= 8; i++) { // If the orginal row of the piece is == (1, 2, 3.. etc) then the row where you wan't to move to can't change or if the orginal column of the piece is == (1, 2, 3.. etc) then the column where you wan't to move to can't change
-										   // In simple terms, the row can either change and the column stays the same, or the column can either change and row stays the same.
-				if (rowP == i or colP == i) {
-					if (colA == colP or rowA == rowP) {
-						return 0;
-					}
-					else {
-						std::cout << "Error: Unable to move this piece there";
-						exit(1);
-					}
+		for (int i = 0; i <= 8; i++) { // If the orginal row of the piece is == (1, 2, 3.. etc) then the row where you wan't to move to can't change or if the orginal column of the piece is == (1, 2, 3.. etc) then the column where you wan't to move to can't change
+			// In simple terms, the row can either change and the column stays the same, or the column can either change and row stays the same.
+			if (rowP == i or colP == i) {
+				if (colA == colP or rowA == rowP) {
+					return 0;
+				}
+				else {
+					std::cout << "Error: Unable to move this piece there";
+					exit(1);
 				}
 			}
+		}
+	}
+	else if (pA == " bW" or pA == " bB") {
+
+		 
 	}
 		
 return 0;

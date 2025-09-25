@@ -3,7 +3,7 @@
 
 int conversionR(char letR, char numR, std::string& pR) {
 
-	if (pR.length() != 2) { 
+	if (pR.length() != 3) { 
 		std::cout << "Error: Invalid input";
 		exit(1);
 	}
