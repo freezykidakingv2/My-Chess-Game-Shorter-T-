@@ -3,6 +3,7 @@
 #include "printBoard.h"
 #include "pieces.h"
 #include "moves.h"
+#include "checkP.h"
 
 int main() {
 
@@ -56,22 +57,14 @@ int main() {
 			char letter = piece[0];
 			char number = piece[1];
 
-			if (piece.length() != 3) { // Checking to see if the input is 2 characters long.
-				std::cerr << "Error: Incorrect input";
-				exit(1);
+
+			if (checkP(whiteP, chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)]) != 0) {
+				exit(0);
 			}
 
-			for (int pW = 0; pW < whiteP.size(); pW++) { // Checking to see if the piece is in the white pieces vector.
-
-				if (chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] != whiteP[pW]) {
-					if (pW > 8) {
-						std::cerr << "Error: Invalid Input";
-						exit(1);
-					}
-				}
-				else {
-					break;
-				}
+			if (piece.length() != 2) { // Checking to see if the input is 2 characters long.
+				std::cerr << "Error: Incorrect input";
+				exit(1);
 			}
 
 			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
@@ -108,19 +101,6 @@ int main() {
 			char letter = piece[0];
 			char number = piece[1];
 			
-			for (int p = 0; p < blackP.size(); p++) {
-				
-				if (chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] != blackP[p]) {
-					if (p > 8) {
-						std::cerr << "Error: Invalid Input";
-						exit(1);
-					}
-				}
-				else {
-					break;
-				}
-			}
-
 			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
 
 			std::string move;

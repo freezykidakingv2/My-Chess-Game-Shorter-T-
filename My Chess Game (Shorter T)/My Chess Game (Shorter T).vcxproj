@@ -133,7 +133,7 @@
     <ClCompile Include="printBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="checkP.hpp" />
+    <ClInclude Include="checkP.h" />
     <ClInclude Include="moves.h" />
     <ClInclude Include="pieces.h" />
     <ClInclude Include="printBoard.h" />
