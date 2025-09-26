@@ -39,6 +39,10 @@ int main() {
 		}
 	}
 
+	for (int m = 0; m < whiteP.size(); m++) { // Store the white pieces in a vector called whiteP.
+		std::cout << whiteP[m];
+	}
+
 	bool gameONF = true; // This variable is for the first turns.
 	bool whiteT; // This variable is for white's turn.
 	bool gameONS; // This variable is for the rest of the turns.
@@ -60,6 +64,7 @@ int main() {
 
 			if (checkP(whiteP, chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)]) != 0) {
 				std::cout << "Error: Wrong Piece" << '\n';
+				exit(1);
 			}
 
 			if (piece.length() != 2) { // Checking to see if the input is 2 characters long.
