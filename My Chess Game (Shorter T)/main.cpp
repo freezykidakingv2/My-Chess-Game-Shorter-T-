@@ -4,13 +4,27 @@
 #include "pieces.h"
 #include "moves.h"
 #include "checkP.h"
+#include "score.h"
 
 int main() {
+
+	struct convertions {
+		int convertedR;
+		int convertedC;
+		int convertedMR;
+		int convertedMC;
+	};
 
 	printBoardC print;
 	printBoardC any;
 	printBoardC chessP;
 	printBoardC movesM;
+	score Iftaken;
+	convertions use;
+
+	int score = 0;
+	
+	std::cout << "Black's score: " << score << '\n' << '\n';
 
 	print.printBoard(); // Print the chessboard. Example: 
 	std::cout << '\n' << '\n'; /* " "," A"," B"," C"," D"," E"," F"," G"," H"
@@ -39,10 +53,6 @@ int main() {
 		}
 	}
 
-	for (int m = 0; m < whiteP.size(); m++) { // Store the white pieces in a vector called whiteP.
-		std::cout << whiteP[m];
-	}
-
 	bool gameONF = true; // This variable is for the first turns.
 	bool whiteT; // This variable is for white's turn.
 	bool gameONS; // This variable is for the rest of the turns.
@@ -61,8 +71,12 @@ int main() {
 			char letter = piece[0];
 			char number = piece[1];
 
+			use.convertedR = conversionR(letter, number, piece);
+			use.convertedC = conversionC(letter, number, piece);
 
-			if (checkP(whiteP, chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)]) != 0) {
+			std::string selectedP = chessP.chessboard[use.convertedR][use.convertedC];
+
+			if (checkP(whiteP, selectedP) != 0) {
 				std::cout << "Error: Wrong Piece" << '\n';
 				exit(1);
 			}
@@ -72,7 +86,7 @@ int main() {
 				exit(1);
 			}
 
-			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
+			std::cout << "You've selected: " << selectedP << '\n';
 
 			std::string move;
 			std::cout << "Choose where to move the piece to: ";
@@ -81,9 +95,19 @@ int main() {
 			char letterM = move[0];
 			char numberM = move[1];
 
-			movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)] = chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)];
-			abilities(movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)], conversionRM(letterM, numberM, move), conversionCM(letterM, numberM, move), conversionR(letter, number, piece), conversionC(letter, number, piece));
-			chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] = "  ";
+			use.convertedMR = conversionRM(letterM, numberM, move);
+			use.convertedMC = conversionCM(letterM, numberM, move);
+
+			movesM.chessboard[use.convertedMR][use.convertedMC] = selectedP;
+			
+			std::string movingTo = movesM.chessboard[use.convertedMR][use.convertedMC];
+
+			if (Iftaken.scoreF(any.chessboard, movingTo) != 0) {
+				score += 1;
+			}
+			
+			abilities(movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
+			selectedP = "  ";
 
 			print.printBoard();
 		}
@@ -106,7 +130,12 @@ int main() {
 			char letter = piece[0];
 			char number = piece[1];
 			
-			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
+			use.convertedR = conversionR(letter, number, piece);
+			use.convertedC = conversionC(letter, number, piece);
+
+			std::string selectedP = chessP.chessboard[use.convertedR][use.convertedC];
+
+			std::cout << "You've selected: " << selectedP << '\n';
 
 			std::string move;
 			std::cout << "Choose where to move the piece to: ";

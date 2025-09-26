@@ -42,7 +42,7 @@ int conversionCM(char letCM, char numCM, std::string& pCM) {
 
 int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 
-	if ((pA == " kW" or pA == " nW") or  (pA == " kB" or pA == " nB")) {
+	if (pA == " kW" or pA ==  " kB") {
 		if ((rowA == rowP + 2 and (colA == colP + 1 or colA == colP - 1)) or (rowA == rowP -2 and (colA == colP -1)) or (rowA == rowP + 1 and (colA == colP + 2 or colA == colP - 2)) or (rowA == rowP - 1 and (colA == colP - 2 or colA == colP + 2))) {
 			return 0;
 		}
