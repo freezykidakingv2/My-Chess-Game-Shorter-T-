@@ -10,7 +10,6 @@ int conversionR(char letR, char numR, std::string& pR) {
 	
 	letR = std::toupper(letR);
 	
-	int col = (letR - 'A') + 1;
 	int row = (numR - '0');
 
 	if (row < 0 or row > 8) { 

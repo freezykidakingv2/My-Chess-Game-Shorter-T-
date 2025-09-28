@@ -58,7 +58,6 @@ int main() {
 	}
 
 	bool gameONF = true; // This variable is for the first turns.
-	bool whiteT; // This variable is for white's turn.
 	int counter = 1;
 
 	while (gameONF == true) { // While on the first turns ...
@@ -111,10 +110,8 @@ int main() {
 				scoreW += 1;
 			}
 
-			movesM.chessboard[use.convertedMR][use.convertedMC] = *selectedP;
+			*movingTo = *selectedP;
 			
-			*movingTo = movesM.chessboard[use.convertedMR][use.convertedMC];
-
 			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
 			*selectedP = "   ";
 
@@ -141,7 +138,7 @@ int main() {
 			use.convertedR = conversionR(letter, number, piece);
 			use.convertedC = conversionC(letter, number, piece);
 
-			*selectedP = chessP.chessboard[use.convertedR][use.convertedC];
+			selectedP = &chessP.chessboard[use.convertedR][use.convertedC];
 
 			if (checkP(blackP, *selectedP) != 0) {
 				std::cout << "Error: Wrong Piece" << '\n';
@@ -159,13 +156,15 @@ int main() {
 			use.convertedMR = conversionRM(letterM, numberM, move);
 			use.convertedMC = conversionCM(letterM, numberM, move);
 
-			*movingTo = movesM.chessboard[use.convertedMR][use.convertedMC];
+			movingTo = &movesM.chessboard[use.convertedMR][use.convertedMC];
+
+			std::cout << "Row: " << use.convertedMR << "Column: " << use.convertedMC;
 
 			if (Iftaken.scoreF(*movingTo) != 0) {
 				scoreB += 1;
 			}
 
-			*movingTo = *selectedP;
+			movesM.chessboard[use.convertedMR][use.convertedMC] = *selectedP;
 
 			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
 			*selectedP = "   ";

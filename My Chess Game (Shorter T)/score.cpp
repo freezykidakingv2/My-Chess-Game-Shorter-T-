@@ -6,7 +6,6 @@ int score::scoreF(std::string moveTo) {
 		return 0;
 	}
 	else {
-		std::cout << moveTo;
 		return 1;
 	}
 }
