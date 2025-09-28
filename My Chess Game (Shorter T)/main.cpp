@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <cstdlib>
 #include "printBoard.h"
 #include "pieces.h"
 #include "moves.h"
@@ -22,9 +23,12 @@ int main() {
 	score Iftaken;
 	convertions use;
 
-	int score = 0;
-	
-	std::cout << "Black's score: " << score << '\n' << '\n';
+	int scoreW = 0;
+	int scoreB = 0;
+
+	std::cout << "Black's score: " << scoreB;
+	std::cout << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << "White's score: " << scoreW << '\n' << '\n';
+
 
 	print.printBoard(); // Print the chessboard. Example: 
 	std::cout << '\n' << '\n'; /* " "," A"," B"," C"," D"," E"," F"," G"," H"
@@ -55,16 +59,19 @@ int main() {
 
 	bool gameONF = true; // This variable is for the first turns.
 	bool whiteT; // This variable is for white's turn.
-	bool gameONS; // This variable is for the rest of the turns.
+	int counter = 1;
 
 	while (gameONF == true) { // While on the first turns ...
 
-		whiteT = true;
-
-		if (whiteT == true) {
 			std::string piece;
 			std::cout << '\n';
-			std::cout << "White goes first" << '\n' << '\n';
+			if (counter == 1) {
+				std::cout << "White goes first" << '\n' << '\n';
+				counter++;
+			}
+			else {
+				std::cout << "White's turn" << '\n' << '\n';
+			}
 			std::cout << "Pick a piece: ";
 			std::cin >> piece;
 
@@ -74,9 +81,9 @@ int main() {
 			use.convertedR = conversionR(letter, number, piece);
 			use.convertedC = conversionC(letter, number, piece);
 
-			std::string selectedP = chessP.chessboard[use.convertedR][use.convertedC];
+			std::string *selectedP = &chessP.chessboard[use.convertedR][use.convertedC];
 
-			if (checkP(whiteP, selectedP) != 0) {
+			if (checkP(whiteP, *selectedP) != 0) {	// Checking if piece is in white pieces vector.
 				std::cout << "Error: Wrong Piece" << '\n';
 				exit(1);
 			}
@@ -86,7 +93,7 @@ int main() {
 				exit(1);
 			}
 
-			std::cout << "You've selected: " << selectedP << '\n';
+			std::cout << "You've selected: " << *selectedP << '\n';
 
 			std::string move;
 			std::cout << "Choose where to move the piece to: ";
@@ -98,129 +105,77 @@ int main() {
 			use.convertedMR = conversionRM(letterM, numberM, move);
 			use.convertedMC = conversionCM(letterM, numberM, move);
 
-			movesM.chessboard[use.convertedMR][use.convertedMC] = selectedP;
-			
-			std::string movingTo = movesM.chessboard[use.convertedMR][use.convertedMC];
+			std::string * movingTo = &movesM.chessboard[use.convertedMR][use.convertedMC];
 
-			if (Iftaken.scoreF(any.chessboard, movingTo) != 0) {
-				score += 1;
+			if (Iftaken.scoreF(*movingTo) != 0) {
+				scoreW += 1;
 			}
+
+			movesM.chessboard[use.convertedMR][use.convertedMC] = *selectedP;
 			
-			abilities(movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
-			selectedP = "  ";
+			*movingTo = movesM.chessboard[use.convertedMR][use.convertedMC];
 
+			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
+			*selectedP = "   ";
+
+			// Blacks's turn :
+
+			system("cls");
+			std::cout << "Black's score: " << scoreB;
+			std::cout << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << "White's score: " << scoreW << '\n' << '\n';
 			print.printBoard();
-		}
 
-		whiteT = false;
-
-		if (whiteT == false) {
-
-			std::string piece;
 			std::cout << '\n' << '\n';
 			std::cout << "Blacks turn: " << '\n' << '\n';
 			std::cout << "Pick a piece: ";
 			std::cin >> piece;
-
-			if (piece.length() != 3) {
-				std::cerr << "Error: Incorrect input";
-				exit(1);
-			}
-
-			char letter = piece[0];
-			char number = piece[1];
-			
-			use.convertedR = conversionR(letter, number, piece);
-			use.convertedC = conversionC(letter, number, piece);
-
-			std::string selectedP = chessP.chessboard[use.convertedR][use.convertedC];
-
-			std::cout << "You've selected: " << selectedP << '\n';
-
-			std::string move;
-			std::cout << "Choose where to move the piece to: ";
-			std::cin >> move;
-
-			char letterM = move[0];
-			char numberM = move[1];
-
-			movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)] = chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)];
-			abilities(movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)], conversionRM(letterM, numberM, move), conversionCM(letterM, numberM, move), conversionR(letter, number, piece), conversionC(letter, number, piece));
-			chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] = "  ";
-
-			print.printBoard();
-		
-		}
-		break;
-	}
-
-	gameONS = true;
-
-	while (gameONS == true) {
-
-		whiteT = true;
-
-		if (whiteT == true) {
-			std::string piece;
-			std::cout << '\n' << '\n';
-			std::cout << "White's turn: " << '\n' << '\n';
-			std::cout << "Pick a piece: ";
-			std::cin >> piece;
-
-			char letter = piece[0];
-			char number = piece[1];
 
 			if (piece.length() != 2) {
 				std::cerr << "Error: Incorrect input";
 				exit(1);
 			}
+
+			letter = piece[0];
+			number = piece[1];
 			
-			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
+			use.convertedR = conversionR(letter, number, piece);
+			use.convertedC = conversionC(letter, number, piece);
 
-			std::string move;
+			*selectedP = chessP.chessboard[use.convertedR][use.convertedC];
+
+			if (checkP(blackP, *selectedP) != 0) {
+				std::cout << "Error: Wrong Piece" << '\n';
+				exit(1);
+			}
+
+			std::cout << "You've selected: " << *selectedP << '\n';
+
 			std::cout << "Choose where to move the piece to: ";
 			std::cin >> move;
 
-			char letterM = move[0];
-			char numberM = move[1];
+			letterM = move[0];
+			numberM = move[1];
 
-			movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)] = chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)];
-			abilities(movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)], conversionRM(letterM, numberM, move), conversionCM(letterM, numberM, move), conversionR(letter, number, piece), conversionC(letter, number, piece));
-			chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] = "  ";
+			use.convertedMR = conversionRM(letterM, numberM, move);
+			use.convertedMC = conversionCM(letterM, numberM, move);
 
+			*movingTo = movesM.chessboard[use.convertedMR][use.convertedMC];
+
+			if (Iftaken.scoreF(*movingTo) != 0) {
+				scoreB += 1;
+			}
+
+			*movingTo = *selectedP;
+
+			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
+			*selectedP = "   ";
+			
+			system("cls");
+			std::cout << "Black's score: " << scoreB;
+			std::cout << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << '\t' << "White's score: " << scoreW << '\n' << '\n';
 			print.printBoard();
-		}
-
-		whiteT = false;
-
-		if (whiteT == false) {
-
-			std::string piece;
-			std::cout << '\n' << '\n';
-			std::cout << "Blacks turn: " << '\n' << '\n';
-			std::cout << "Pick a piece: ";
-			std::cin >> piece;
-
-			char letter = piece[0];
-			char number = piece[1];
-
-			std::cout << "You've selected: " << chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] << '\n';
-
-			std::string move;
-			std::cout << "Choose where to move the piece to: ";
-			std::cin >> move;
-
-			char letterM = move[0];
-			char numberM = move[1];
-
-			movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)] = chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)];
-			abilities(movesM.chessboard[conversionRM(letterM, numberM, move)][conversionCM(letterM, numberM, move)], conversionRM(letterM, numberM, move), conversionCM(letterM, numberM, move), conversionR(letter, number, piece), conversionC(letter, number, piece));
-			chessP.chessboard[conversionR(letter, number, piece)][conversionC(letter, number, piece)] = "  ";
-
-			print.printBoard();
-
-		}
 	}
 
 	return 0;
 }
+

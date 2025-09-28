@@ -6,6 +6,6 @@ class score
 { public:
 
 	std::vector<std::string> empty;
-	int scoreF(std::vector<std::vector<std::string>> board, std::string moveTo);
+	int scoreF(std::string moveTo);
 };
 
