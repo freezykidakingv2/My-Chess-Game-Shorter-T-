@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="checkP.cpp" />
+    <ClCompile Include="check.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="moves.cpp" />
     <ClCompile Include="pieces.cpp" />
@@ -135,7 +135,7 @@
     <ClCompile Include="score.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="checkP.h" />
+    <ClInclude Include="check.h" />
     <ClInclude Include="moves.h" />
     <ClInclude Include="pieces.h" />
     <ClInclude Include="printBoard.h" />

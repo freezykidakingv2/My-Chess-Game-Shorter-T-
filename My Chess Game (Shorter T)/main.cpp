@@ -4,7 +4,7 @@
 #include "printBoard.h"
 #include "pieces.h"
 #include "moves.h"
-#include "checkP.h"
+#include "check.h"
 #include "score.h"
 
 int main() {
@@ -74,6 +74,11 @@ int main() {
 			std::cout << "Pick a piece: ";
 			std::cin >> piece;
 
+			if (piece.length() != 2) { // Checking to see if the input is 2 characters long.
+				std::cerr << "Error: Incorrect input";
+				exit(1);
+			}
+
 			char letter = piece[0];
 			char number = piece[1];
 
@@ -82,13 +87,10 @@ int main() {
 
 			std::string *selectedP = &chessP.chessboard[use.convertedR][use.convertedC];
 
+			checkSurroundings(any.chessboard, *selectedP, use.convertedR, use.convertedC);
+
 			if (checkP(whiteP, *selectedP) != 0) {	// Checking if piece is in white pieces vector.
 				std::cout << "Error: Wrong Piece" << '\n';
-				exit(1);
-			}
-
-			if (piece.length() != 2) { // Checking to see if the input is 2 characters long.
-				std::cerr << "Error: Incorrect input";
 				exit(1);
 			}
 
@@ -105,6 +107,8 @@ int main() {
 			use.convertedMC = conversionCM(letterM, numberM, move);
 
 			std::string * movingTo = &movesM.chessboard[use.convertedMR][use.convertedMC];
+
+			checkM(*selectedP, *movingTo);
 
 			if (Iftaken.scoreF(*movingTo) != 0) {
 				scoreW += 1;
@@ -158,15 +162,14 @@ int main() {
 
 			movingTo = &movesM.chessboard[use.convertedMR][use.convertedMC];
 
-			std::cout << "Row: " << use.convertedMR << "Column: " << use.convertedMC;
+			checkM(*selectedP, *movingTo);
 
 			if (Iftaken.scoreF(*movingTo) != 0) {
 				scoreB += 1;
 			}
 
-			movesM.chessboard[use.convertedMR][use.convertedMC] = *selectedP;
-
 			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
+			*movingTo = *selectedP;
 			*selectedP = "   ";
 			
 			system("cls");

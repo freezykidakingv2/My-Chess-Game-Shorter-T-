@@ -27,7 +27,7 @@
     <ClCompile Include="printBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="checkP.cpp">
+    <ClCompile Include="check.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="score.cpp">
@@ -44,7 +44,7 @@
     <ClInclude Include="printBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="checkP.h">
+    <ClInclude Include="check.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="score.h">

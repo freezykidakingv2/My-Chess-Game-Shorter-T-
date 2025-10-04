@@ -3,11 +3,6 @@
 
 int conversionR(char letR, char numR, std::string& pR) {
 
-	if (pR.length() != 2) { 
-		std::cout << "Error: Invalid input";
-		exit(1);
-	}
-	
 	letR = std::toupper(letR);
 	
 	int row = (numR - '0');
@@ -22,11 +17,6 @@ int conversionR(char letR, char numR, std::string& pR) {
 }
 
 int conversionC(char letC, char numC, std::string& pC) {
-
-	if (pC.length() != 2) {
-		std::cout << "Error: Invalid input";
-		exit(1);
-	}
 
 	letC = std::toupper(letC);
 
