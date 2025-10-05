@@ -32,13 +32,13 @@ void checkM(std::string pieceID, std::string locationTo) {
 void checkSurroundings(std::vector<std::vector<std::string>> chessboardV, std::string piece, int row, int col) {
 		if (piece == " rW" or piece == " rB") {
 			if ((row > 1 and row < 8) and (col > 1 and col < 8)) {
-				if (((chessboardV[row + 1 and row - 1][col] != "    ") or (chessboardV[row][col + 1 and col - 1] != "   ")) or ((chessboardV[row + 1 and row - 1][col][chessboardV[row + 1 and row - 1][col].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]) or (chessboardV[row][col + 1 and col - 1][chessboardV[row ][col + 1 and col - 1].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]))) {
+				if (((chessboardV[row + 1 and row - 1][col] != "    ") or (chessboardV[row][col + 1 and col - 1] != "   ")) and ((chessboardV[row + 1 and row - 1][col][chessboardV[row + 1 and row - 1][col].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]) or (chessboardV[row][col + 1 and col - 1][chessboardV[row ][col + 1 and col - 1].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]))) {
 					std::cout << "Error: Unable to move this piece";
 					exit(1);
 				}
 			}
 			else {
-				if (chessboardV[row + 1][col] != "   "  or chessboardV[row + 1][col][chessboardV[row + 1][col].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]) {
+				if (chessboardV[row + 1][col] != "   "  and chessboardV[row + 1][col][chessboardV[row + 1][col].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]) {
 					std::cout << "Error: Unable to move this piece";
 					exit(1);
 				}
