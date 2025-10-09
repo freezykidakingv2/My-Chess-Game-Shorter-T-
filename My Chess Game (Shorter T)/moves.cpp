@@ -42,7 +42,7 @@ int conversionCM(char letCM, char numCM, std::string& pCM) {
 
 int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 
-	if (pA == " kW" or pA ==  " kB") {
+	if (pA == " nW" or pA == " nB") {
 		if ((rowA == rowP + 2 and (colA == colP + 1 or colA == colP - 1)) or (rowA == rowP -2 and (colA == colP -1)) or (rowA == rowP + 1 and (colA == colP + 2 or colA == colP - 2)) or (rowA == rowP - 1 and (colA == colP - 2 or colA == colP + 2))) {
 			return 0;
 		}
@@ -85,6 +85,30 @@ int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 			}
 		 }
 	}
-		
+	else if (pA == " pW" or pA == " pB") {
+		if (pA == " pW") {
+			if ((rowA == rowP + 2 and rowA == 4) and colA == colP) {
+				return 0;
+			}
+			else if (rowA == rowP + 1 and colA == colP) {
+				return 0;
+			}
+			else {
+				std::cout << "Error: Unable to move this piece there";
+				exit(1);
+			}
+		}
+		else {
+			if ((rowA == rowP - 2 and rowA == 5 and colA == colP) or (rowA == rowP - 1 and colA == colP)) {
+				return 0;
+			}
+			else {
+				std::cout << "Error: Unable to move this piece there";
+				exit(1);
+			}
+		}
+	}
+	else if ()
+
 return 0;
 }

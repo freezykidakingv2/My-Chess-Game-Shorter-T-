@@ -88,7 +88,7 @@ int main() {
 			std::string *selectedP = &chessP.chessboard[use.convertedR][use.convertedC];
 
 			checkSurroundings(any.chessboard, *selectedP, use.convertedR, use.convertedC);
-
+			
 			if (checkP(whiteP, *selectedP) != 0) {	// Checking if piece is in white pieces vector.
 				std::cout << "Error: Wrong Piece" << '\n';
 				exit(1);
@@ -144,6 +144,8 @@ int main() {
 
 			selectedP = &chessP.chessboard[use.convertedR][use.convertedC];
 
+			checkSurroundings(any.chessboard, *selectedP, use.convertedR, use.convertedC);
+
 			if (checkP(blackP, *selectedP) != 0) {
 				std::cout << "Error: Wrong Piece" << '\n';
 				exit(1);
@@ -168,8 +170,9 @@ int main() {
 				scoreB += 1;
 			}
 
-			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
 			*movingTo = *selectedP;
+
+			abilities(*movingTo, use.convertedMR, use.convertedMC, use.convertedR, use.convertedC);
 			*selectedP = "   ";
 			
 			system("cls");

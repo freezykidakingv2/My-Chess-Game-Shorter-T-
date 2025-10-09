@@ -44,11 +44,19 @@ void checkSurroundings(std::vector<std::vector<std::string>> chessboardV, std::s
 				}
 			}
 		}
-		/*else if (piece == " pW" or piece == " pB") {
-			if ((chessboardV[row + 1][col] != "   ") or (chessboardV[row + -1][col] != "   ")) {
-				std::cout << "Error: Unable to move this piece";
-				exit(1);
+		else if (piece == " pW" or piece == " pB") {
+			if (piece == " pW") {
+				if ((chessboardV[row + 1][col] != "   ") or (chessboardV[row - 1][col] != "   ")) {
+					std::cout << "Error: Unable to move this piece";
+					exit(1);
+				}
 			}
-		}*/
+			else {
+				if (chessboardV[row - 1][col] != "   ") {
+					std::cout << "Error: Unable to move this piece";
+					exit(1);
+				}
+			}
+		}
 
 }

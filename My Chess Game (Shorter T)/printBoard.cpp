@@ -2,14 +2,14 @@
 
 std::vector<std::vector<std::string>> printBoardC::chessboard = {
 	{ " ","  A","  B","  C","  D","  E","  F","  G","  H" },
-	{ "1"," rW"," kW"," bW"," qW"," kW"," bW"," kW"," rW" },
+	{ "1"," rW"," nW"," bW"," qW"," kW"," bW","nW"," rW" },
 	{ "2"," pW"," pW"," pW"," pW"," pW"," pW"," pW"," pW" },
 	{ "3","   ","   ","   ","   ","   ","   ","   ","   " },
 	{ "4","   ","   ","   ","   ","   ","   ","   ","   " },
 	{ "5","   ","   ","   ","   ","   ","   ","   ","   " },
 	{ "6","   ","   ","   ","   ","   ","   ","   ","   " },
 	{ "7"," pB"," pB"," pB"," pB"," pB"," pB"," pB"," pB" },
-	{ "8"," rB"," kB"," bB"," qB"," kB"," bB"," kB"," rB" }
+	{ "8"," rB"," nB"," bB"," qB"," kB"," bB"," nB"," rB" }
 };
 
 void printBoardC::printBoard() {
