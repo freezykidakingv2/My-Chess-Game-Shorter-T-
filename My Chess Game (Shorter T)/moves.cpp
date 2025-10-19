@@ -77,7 +77,6 @@ int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 			}
 			else {
 				if (i == 8) {
-					std::cout << "New row: " << rowA << " Old row: " << rowP << " New column: " << colA << " Old Column: " << colP;
 					std::cout << "Error: Unable to move this piece there";
 					exit(1);
 
@@ -108,7 +107,15 @@ int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 			}
 		}
 	}
-	else if ()
+	else if (pA == " qW" or pA == " qB") {
+		if ((rowA == rowP + 2 and (colA == colP + 1 or colA == colP - 1)) or (rowA == rowP - 2 and (colA == colP - 1 or colA == colP + 1)) or (rowA == rowP + 1 and (colA == colP + 2 or colA == colP - 2)) or (rowA == rowP - 1 and (colA == colP - 2 or colA == colP + 2))) {
+			std::cout << "Error: Unable to move this piece there";
+			exit(1);
+		}
+		else {
+			return 0;
+		}
+	}
 
 return 0;
 }
