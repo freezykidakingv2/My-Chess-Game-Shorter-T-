@@ -271,7 +271,7 @@ int checkSurroundings(std::vector<std::vector<std::string>> chessboardV, std::st
 			}
 
 		}
-		else if (piece == " kW" or piece == "kB") {
+		else if (piece == " kW" or piece == " kB") {
 			int startingR = row - 1;
 			int startingC = col - 1;
 			int notEmpty = 0;
