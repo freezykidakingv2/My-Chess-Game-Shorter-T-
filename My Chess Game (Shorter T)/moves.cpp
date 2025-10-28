@@ -256,5 +256,6 @@ int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 			}
 		}
 	}
-return 0;
+
+	return 0;
 }
