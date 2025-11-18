@@ -86,7 +86,7 @@ int main() {
 			use.convertedC = conversionC(letter, number, piece);
 
 			std::string *selectedP = &chessP.chessboard[use.convertedR][use.convertedC];
-
+			
 			checkSurroundings(any.chessboard, *selectedP, use.convertedR, use.convertedC);
 			
 			if (checkP(whiteP, *selectedP) != 0) {	// Checking if piece is in white pieces vector.
@@ -108,7 +108,7 @@ int main() {
 
 			std::string * movingTo = &movesM.chessboard[use.convertedMR][use.convertedMC];
 
-			checkM(*selectedP, *movingTo);
+			checkM(*selectedP, *movingTo, use.convertedMR, use.convertedMC);
 
 			if (Iftaken.scoreF(*movingTo) != 0) {
 				scoreW += 1;
@@ -164,7 +164,7 @@ int main() {
 
 			movingTo = &movesM.chessboard[use.convertedMR][use.convertedMC];
 
-			checkM(*selectedP, *movingTo);
+			checkM(*selectedP, *movingTo, use.convertedMR, use.convertedMC);
 
 			if (Iftaken.scoreF(*movingTo) != 0) {
 				scoreB += 1;

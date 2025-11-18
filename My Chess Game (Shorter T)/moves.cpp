@@ -43,12 +43,554 @@ int conversionCM(char letCM, char numCM, std::string& pCM) {
 int abilities(std::string pA, int rowA, int colA, int rowP, int colP) {
 
 	if (pA == " nW" or pA == " nB") {
-		if ((rowA == rowP + 2 and (colA == colP + 1 or colA == colP - 1)) or (rowA == rowP -2 and (colA == colP -1)) or (rowA == rowP + 1 and (colA == colP + 2 or colA == colP - 2)) or (rowA == rowP - 1 and (colA == colP - 2 or colA == colP + 2))) {
-			return 0;
-		}
-		else {
+		if ((rowP > 2 and rowP < 7) and (colP > 1 and colP < 7)) {
+			for (int i = rowP - 2; i <= rowP + 2; i++) {
+				for (int j = colP - 2; j <= colP + 2; j++) {
+					if (rowP - i == 2 or rowP - i == -2) {
+						if (j == colP + 1 or j == colP - 1) {
+							if (rowA == i and colA == j) {
+								return 0;
+							}
+						}
+					}
+					else {
+						if (i == rowP) {
+							break;
+						}
+						
+						if (j == colP - 2 or j == colP + 2) {
+							if (rowA == i or colA == j) {
+								return 0;
+							}
+						}
+					}
+				}
+			}
 			std::cout << "Error: Unable to move this piece there";
 			exit(1);
+		}
+		else if (rowP == 2 or rowP == 7) {
+			if (rowP == 2) {
+				if (colP == 1) {
+					for (int i = rowP - 1; i <= 4; i++) {
+						for (int j = colP + 1; j <= colP + 2; j++) {
+							if (rowP != 4) {
+								if (i == rowP) {
+									break;
+								}
+
+								if (j == 3) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+							else {
+								if (j == 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+				else if (colP >= 2 and colP < 7) {
+					for (int i = 1; i <= 4; i++) {
+						for (int j = colP - 2; j <= colP + 2; j++) {
+							if (i != 4) {
+								if (i == rowP) {
+									break;
+								}
+
+								if (j == colP - 2 or j == colP + 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									if (j == colP - 2) {
+										j += 2;
+										continue;
+									}
+								}
+							}
+							else {
+								if (j == colP + 1 or j == colP - 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+				else if (colP == 7) {
+					for (int i = 3; i <= 4; i++) {
+						for (int j = colP - 2; j <= 8; j++) {
+							if (i == 3) {
+								if (j == 5) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								if (j == 6 or j == 8) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									
+									if (j == 8) {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					for (int i = rowP - 1; i <= 4; i++) {
+						for (int j = 6; j <= 8; j++) {
+							if (rowP != 4) {
+								if (j == 6) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								if (i == rowP) {
+									break;
+								}
+
+								if (j == 7) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else {
+				if (colP == 1) {
+					for (int i = 5; i <= 8; i++) {
+						for (int j = colP; j <= colP + 2; j++) {
+							if (rowP != 5) {
+								if (i == rowP) {
+									break;
+								}
+								
+								if (j == 3) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									
+									if (i == 8) {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+							else {
+
+								if (j == 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+				else if (colP >= 2 and colP < 7) {
+					for (int i = 5; i <= 8; i++) {
+						for (int j = colP - 2; j <= colP + 2; j++) {
+							if (rowP != 5) {
+								if (i == rowP) {
+									break;
+								}
+
+								if (j == 4) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+
+									if (i == 8) {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+							else {
+
+								if (j == colP + 1 or j == colP - 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				} 
+				else if (colP == 7) {
+					for (int i = 5; i <= 8; i++) {
+						for (int j = colP - 2; j <= colP + 1; j++) {
+							if (rowP != 5) {
+								if (i == rowP) {
+									break;
+								}
+
+								if (j == 5) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+
+									if (i == 8) {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+							else {
+								if (j == colP + 1 or j == colP - 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					for (int i = 5; i <= 8; i++) {
+						for (int j = 6; j <= colP; j++) {
+							if (rowP != 5) {
+								if (i == rowP) {
+									break;
+								}
+
+								if (j == 6) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+
+									if (i == 8) {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+							else {
+
+								if (j == colP - 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else if ((rowP == 1 or rowP == 8) and (colP == 1 or colP == 8)) {
+			if (rowP == 1) {
+				if (colP == 1) {
+					for (int i = 2; i <= 3; i++) {
+						for (int j = 2; j <= 3; j++) {
+							if (i == 2) {
+								if (j == 3) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+							else {
+
+								if (j == 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					for (int i = 2; i <= 3; i++) {
+						for (int j = 6; j <= 7; j++) {
+							if (i == 2) {
+								if (j == 6) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+							else {
+
+								if (j == 7) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else {
+				if (colP == 1) {
+					for (int i = 6; i <= 7; i++) {
+						for (int j = 2; j <= 3; j++) {
+							if (i == 7) {
+								if (j == 3) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+							else {
+								if (j == 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					for (int i = 6; i <= 7; i++) { // tuff
+						for (int j = 6; j <= 7; j++) { // tuff
+							if (i == 6) {
+								if (j == 7) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+							else {
+								if (j == 6) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+									else {
+										std::cout << "Error: Unable to move this piece there";
+										exit(1);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else if ((rowP > 2 and rowP < 7) and (colP == 1 or colP == 8)) {
+			if (colP == 1) {
+				for (int i = rowP - 2; i <= rowP + 2; i++) {
+					for (int j = 2; j <= 3; j++) {
+						if (i == rowP) {
+							break;
+						}
+						
+						if (i == rowP + 2 or i == rowP - 2) {
+							if (j == 2) {
+								if (rowA == i and colA == j) {
+									return 0;
+								}
+								
+								if (i == rowP - 2) {
+									std::cout << "Error: Unable to move this piece there";
+									exit(1);
+								}
+							}
+						}
+						else {
+							if (j == 3) {
+								if (rowA == i and colA == j) {
+									return 0;
+								}
+							}
+						}
+					}
+				}
+			}
+			else {
+				for (int i = rowP - 2; i <= rowP + 2; i++) {
+					for (int j = 6; j <= 7; j++) { // TUFF
+						if (i == rowP) {
+							break;
+						}
+
+						if (i == rowP + 2 or i == rowP - 2) {
+							if (j == 7) {
+								if (rowA == i and colA == j) {
+									return 0;
+								}
+
+								if (i == rowP - 2) {
+									std::cout << "Error: Unable to move this piece there";
+									exit(1);
+								}
+							}
+						}
+						else {
+							if (j == 6) {
+								if (rowA == i and colA == j) {
+									return 0;
+								}
+								else {
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else if ((rowP == 1 or rowP == 8) and (colP >= 2 and colP <= 7)) {
+			if (rowP == 1) {
+				if (colP < 7) {
+					for (int i = 2; i <= 3; i++) {
+						for (int j = colP - 2; j <= colP + 2; j++) {
+							if (i == 2) {
+								if (j == colP - 2 or j == colP + 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									j += 2;
+									continue;
+								}
+							}
+							else {
+								if (j == colP - 1 or j == colP + 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+
+					std::cout << "Error: Unable to move this piece there";
+					exit(1);
+				}
+				else {
+					for (int i = 2; i <= 3; i++) {
+						for (int j = colP - 2; j <= 8; j++) {
+							if (i == 2) {
+								if (j == 5) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								if (j == colP - 1 or j == colP + 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+
+					std::cout << "Error: Unable to move this piece there";
+					exit(1);
+				}
+			}
+			else {
+				if (colP < 7) {
+					for (int i = 6; i <= 7; i++) { // TUFF
+						for (int j = colP - 2; j <= colP + 2; j++) {
+							if (i == 7) {
+								if (j == colP - 2 or j == colP + 2) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									j += 2;
+									continue;
+								}
+							}
+							else {
+								if (j == colP - 1 or j == colP + 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+
+					std::cout << "Error: Unable to move this piece there";
+					exit(1);
+				}
+				else {
+					for (int i = 6; i <= 7; i++) {
+						for (int j = colP - 2; j <= 8; j++) {
+							if (i == 2) {
+								if (j == 5) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+								else {
+									std::cout << "Error: Unable to move this piece there";
+									exit(1);
+								}
+							}
+							else {
+								if (j == colP - 1 or j == colP + 1) {
+									if (rowA == i and colA == j) {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	else if (pA == " rW" or pA == " rB") {

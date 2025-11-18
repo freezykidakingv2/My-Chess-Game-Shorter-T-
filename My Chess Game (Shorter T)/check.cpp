@@ -19,7 +19,12 @@ int checkP(std::vector<std::string> pieces,std::string piece) {
 	
 }
 
-void checkM(std::string pieceID, std::string locationTo) {
+void checkM(std::string pieceID, std::string locationTo, int rowM, int colM) {
+
+	if (rowM < 1 or colM < 1) {
+		std::cout << "Error: Invalid Input" << '\n';
+		exit(1);
+	}
 
 	if (locationTo != "    ") {
 		if (locationTo[locationTo.size() - 1] == pieceID[pieceID.size() - 1]) {
@@ -46,18 +51,170 @@ int checkSurroundings(std::vector<std::vector<std::string>> chessboardV, std::st
 								if (chessboardV[i][j] == "   ") {
 									return 0;
 								}
+							}
+							else {
+								continue;
+							}
+						}
+						else {
+							if (j != col) {
+								if (chessboardV[i][j] == "   ") {
+									return 0;
+								}
+							}
+							else {
+								continue;
+							}
+						}
+					}
+				}
+			}
+			else if ((row == 1 or row == 8) and (col == 1 or col == 8)) {
+				if (row == 1) {
+					if (col == 1) {
+						if (chessboardV[row][2] == "   ") {
+							return 0;
+						}
+						else if (chessboardV[2][col] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+					else {
+						if (chessboardV[row][7] == "   ") {
+							return 0;
+						}
+						else if (chessboardV[2][col] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+				}
+				else {
+					if (col == 1) {
+						if (chessboardV[row][2] == "   ") {
+							return 0;
+						}
+						else if (chessboardV[7][col] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+					else {
+						if (chessboardV[row][7] == "   ") {
+							return 0;
+						}
+						else if (chessboardV[7][col] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+				}
+			}
+			else if ((row > 1 and row < 8) and (col == 1 or col == 8)) {
+				startingR = row - 1;
+				if (col == 1) {
+					for (int i = startingR; i <= row + 1; i++) {
+						for (int j = col; j <= 2; j++) {
+							if (i != row) {
+								if (j == col) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
 								else {
-									continue;
+									break;
+								}
+							}
+							else {
+								if (j == 2) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					for (int i = startingR; i <= row + 1; i++) {
+						for (int j = col; j >= 7; j--) {
+							if (i != row) {
+								if (j == col) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
+								else {
+									break;
+								}
+							}
+							else {
+								if (j == 7) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-			else {
-				if (chessboardV[row + 1][col] != "   "  and chessboardV[row + 1][col][chessboardV[row + 1][col].size() - 1] == chessboardV[row][col][chessboardV[row][col].size() - 1]) {
-					std::cout << "Error: Unable to move this piece";
-					exit(1);
+			else if ((row == 1 or row == 8) and (col > 1 and col < 8)) {
+				startingR = row;
+				startingC = col - 1;
+				if (row == 1) {
+					for (int i = startingR; i <= row + 1; i++) {
+						for (int j = startingC; j <= col + 1; j++) {
+							if (i == row) {
+								if (j != col) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
+							}
+							else {
+								if (j == col) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+				else {
+					startingR = row - 1;
+					for (int i = startingR; i <= row + 1; i++) {
+						for (int j = startingC; j <= col + 1; j++) {
+							if (i == row) {
+								if (j != col) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
+							}
+							else {
+								if (j == col) {
+									if (chessboardV[i][j] == "   ") {
+										return 0;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -858,5 +1015,106 @@ int checkSurroundings(std::vector<std::vector<std::string>> chessboardV, std::st
 				}
 			}
 		}
-
+		else if (piece == "bB" or piece == "bW") {
+			if ((row > 1 and row < 7) and (col > 1 and col < 8)) {
+				for (int i = row - 1; i <= row + 1; i++) {
+					if (i == row) {
+						continue;
+					}
+					for (int j = col - 1; j <= col + 1; j++) {
+						if (j == col) {
+							continue;
+						}
+						if (chessboardV[i][j] == "   ") {
+							return 0;
+						}
+					}
+				}
+				std::cout << "Error: Unable to move this piece";
+				exit(1);
+			}
+			else if ((row == 1 or row == 8) and (col == 1 or col == 8)) {
+				if (row == 1) {
+					if (col == 1) {
+						if (chessboardV[2][2] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+					else {
+						if (chessboardV[2][7] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+				}
+				else {
+					if (col == 1) {
+						if (chessboardV[7][2] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+					else {
+						if (chessboardV[7][7] == "   ") {
+							return 0;
+						}
+						else {
+							std::cout << "Error: Unable to move this piece";
+							exit(1);
+						}
+					}
+					
+				}
+			}
+			else if ((row > 1 and row < 8) and (col == 1 or col == 8)) {
+				if (col == 1) {
+					for (int i = row - 1; i <= row + 1; i + 2) {
+						if (chessboardV[i][2] == "   ") {
+							return 0;
+						}
+					}
+					std::cout << "Error: Unable to move this piece";
+					exit(1);
+				}
+				else {
+					for (int i = row - 1; i <= row + 1; i + 2) {
+						if (chessboardV[i][7] == "   ") {
+							return 0;
+						}
+					}
+					std::cout << "Error: Unable to move this piece";
+					exit(1);
+				}
+			}
+			else if ((row == 1 or row == 8) and (col > 1 and col < 8)) {
+				if (row == 1) {
+					for (int j = col - 1; j <= col + 1; j + 2) {
+						if (chessboardV[2][j] == "   ") {
+							return 0;
+						}
+					}
+					std::cout << "Error: Unable to move this piece";
+					exit(1);
+				}
+				else {
+					for (int j = col - 1; j <= col + 1; j + 2) {
+						if (chessboardV[7][j] == "   ") {
+							return 0;
+						}
+					}
+					std::cout << "Error: Unable to move this piece";
+					exit(1);
+				}
+			}
+		}
 }
